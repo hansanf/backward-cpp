@@ -4274,7 +4274,12 @@ public:
 
     Printer printer;
     printer.address = true;
-    printer.print(st, stderr);
+    // printer.print(st, stderr);
+    #warning ":/ log stact trace info into file";
+    std::ofstream file_stream("my_stacktrace.log", std::ios::trunc);
+    if (file_stream.is_open()) {
+      printer.print(st, file_stream);
+    }
 
 #if (defined(_XOPEN_SOURCE) && _XOPEN_SOURCE >= 700) || \
     (defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200809L)
